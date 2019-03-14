@@ -1,0 +1,7 @@
+﻿[assembly: System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Data.Fakes")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Data.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Requests.Fakes")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("RequestHandlers.Fakes")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("RequestHandlers.Tests")]

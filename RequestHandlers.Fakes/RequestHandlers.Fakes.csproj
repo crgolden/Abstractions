@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Clarity.Abstractions.Fakes</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entities.Fakes\Entities.Fakes.csproj" />
+    <ProjectReference Include="..\RequestHandlers\RequestHandlers.csproj" />
+  </ItemGroup>
+
+</Project>
