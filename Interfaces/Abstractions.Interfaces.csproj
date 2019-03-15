@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Clarity.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Clarity.Abstractions.Entities</PackageId>
-    <Version>1.2.0</Version>
+    <PackageId>Clarity.Abstractions.Interfaces</PackageId>
+    <Version>1.3.0</Version>
     <Company>Clarity</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>
@@ -19,6 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Clarity.Core.Claims" Version="1.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
     <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
   </ItemGroup>
 

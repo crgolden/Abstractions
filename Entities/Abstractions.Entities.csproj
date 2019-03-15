@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Clarity.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Clarity.Abstractions.RequestHandlers</PackageId>
-    <Version>1.4.0</Version>
+    <PackageId>Clarity.Abstractions.Entities</PackageId>
+    <Version>1.3.0</Version>
     <Company>Clarity</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>
@@ -19,14 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
     <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
-    <ProjectReference Include="..\Requests\Requests.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,2 +1,2 @@
 ﻿[assembly: System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("RequestHandlers.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Abstractions.RequestHandlers.Tests")]

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers", "Controllers\Controllers.csproj", "{E1F0E4AC-A115-462B-9003-96615DC96418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers", "Controllers\Abstractions.Controllers.csproj", "{E1F0E4AC-A115-462B-9003-96615DC96418}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Requests", "Requests\Requests.csproj", "{EE7BE915-CF12-4585-BB89-F6C05D9C6705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Requests", "Requests\Abstractions.Requests.csproj", "{EE7BE915-CF12-4585-BB89-F6C05D9C6705}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlers", "RequestHandlers\RequestHandlers.csproj", "{3E74A34C-2B5C-475A-9973-BCBC7FA436C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlers", "RequestHandlers\Abstractions.RequestHandlers.csproj", "{3E74A34C-2B5C-475A-9973-BCBC7FA436C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88784449-AECF-4B35-91E5-B26885FF2FCB}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,33 +17,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications", "Notifications\Notifications.csproj", "{BE9F3555-517F-4D6B-8D9B-C20E8950DF06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications", "Notifications\Abstractions.Notifications.csproj", "{BE9F3555-517F-4D6B-8D9B-C20E8950DF06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationHandlers", "NotificationHandlers\NotificationHandlers.csproj", "{376434B5-94C6-4410-8BD6-2A0735B9CBB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationHandlers", "NotificationHandlers\Abstractions.NotificationHandlers.csproj", "{376434B5-94C6-4410-8BD6-2A0735B9CBB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers.Fakes", "Controllers.Fakes\Controllers.Fakes.csproj", "{1CC9E094-96A0-4D28-9FC8-EE92427D9F11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers.Fakes", "Controllers.Fakes\Abstractions.Controllers.Fakes.csproj", "{1CC9E094-96A0-4D28-9FC8-EE92427D9F11}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers.Tests", "Controllers.Tests\Controllers.Tests.csproj", "{49391D21-034A-467C-937F-1417DAAA5BA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controllers.Tests", "Controllers.Tests\Abstractions.Controllers.Tests.csproj", "{49391D21-034A-467C-937F-1417DAAA5BA6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlers.Fakes", "RequestHandlers.Fakes\RequestHandlers.Fakes.csproj", "{A16D3AE8-FBD8-4240-AFF7-E704093DBD1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlers.Fakes", "RequestHandlers.Fakes\Abstractions.RequestHandlers.Fakes.csproj", "{A16D3AE8-FBD8-4240-AFF7-E704093DBD1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlers.Tests", "RequestHandlers.Tests\RequestHandlers.Tests.csproj", "{C365DFFE-F21B-43C7-B965-1789CA6909C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestHandlers.Tests", "RequestHandlers.Tests\Abstractions.RequestHandlers.Tests.csproj", "{C365DFFE-F21B-43C7-B965-1789CA6909C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{4ADFBFB0-DA4E-4D13-ABF7-2F9B2215CCF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Abstractions.Entities.csproj", "{4ADFBFB0-DA4E-4D13-ABF7-2F9B2215CCF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities.Configurations", "Entities.Configurations\Entities.Configurations.csproj", "{CA29C4AF-00CB-4635-AB81-C91CF4B807E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities.Configurations", "Entities.Configurations\Abstractions.Entities.Configurations.csproj", "{CA29C4AF-00CB-4635-AB81-C91CF4B807E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities.Fakes", "Entities.Fakes\Entities.Fakes.csproj", "{743A4744-C7E8-4556-9EB8-41771B5BF5C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities.Fakes", "Entities.Fakes\Abstractions.Entities.Fakes.csproj", "{743A4744-C7E8-4556-9EB8-41771B5BF5C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{15DF14B5-C359-4A06-B3DA-278F464B9475}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Abstractions.Data.csproj", "{15DF14B5-C359-4A06-B3DA-278F464B9475}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Fakes", "Data.Fakes\Data.Fakes.csproj", "{07034915-0EE4-4575-8F6E-D99FA72EDAF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Fakes", "Data.Fakes\Abstractions.Data.Fakes.csproj", "{07034915-0EE4-4575-8F6E-D99FA72EDAF8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Tests", "Data.Tests\Data.Tests.csproj", "{E7A67662-C151-430C-A479-5510B73A7379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Tests", "Data.Tests\Abstractions.Data.Tests.csproj", "{E7A67662-C151-430C-A479-5510B73A7379}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{A3C87EB5-D19A-41BC-8923-8EEBD2987151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Abstractions.Models.csproj", "{A3C87EB5-D19A-41BC-8923-8EEBD2987151}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{771D5CA8-0E97-4A58-8DED-B3E7EF960BB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Abstractions.Interfaces.csproj", "{771D5CA8-0E97-4A58-8DED-B3E7EF960BB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

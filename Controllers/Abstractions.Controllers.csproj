@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Clarity.Abstractions</RootNamespace>
+    <RootNamespace>Clarity.Abstractions.Controllers</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Clarity.Abstractions.Notifications</PackageId>
-    <Version>1.5.0</Version>
+    <PackageId>Clarity.Abstractions.Controllers</PackageId>
+    <Version>1.6.0</Version>
     <Company>Clarity</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>
@@ -19,10 +19,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Clarity.Core.Enums" Version="1.7.0" />
-    <PackageReference Include="MediatR" Version="6.0.0" />
-    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2019.1.220" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.2" />
     <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Notifications\Abstractions.Notifications.csproj" />
+    <ProjectReference Include="..\Requests\Abstractions.Requests.csproj" />
   </ItemGroup>
 
 </Project>

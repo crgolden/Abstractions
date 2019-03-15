@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.Fakes\Data.Fakes.csproj" />
+    <ProjectReference Include="..\Data.Fakes\Abstractions.Data.Fakes.csproj" />
   </ItemGroup>
 
 </Project>

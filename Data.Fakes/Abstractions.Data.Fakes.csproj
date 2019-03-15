@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Entities.Fakes\Entities.Fakes.csproj" />
-    <ProjectReference Include="..\RequestHandlers\RequestHandlers.csproj" />
+    <ProjectReference Include="..\Data\Abstractions.Data.csproj" />
+    <ProjectReference Include="..\Entities.Fakes\Abstractions.Entities.Fakes.csproj" />
   </ItemGroup>
 
 </Project>
