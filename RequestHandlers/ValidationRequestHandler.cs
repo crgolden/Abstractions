@@ -3,6 +3,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
+    using Shared;
 
     public abstract class ValidationRequestHandler<TRequest, TModel> : IRequestHandler<TRequest, bool>
         where TRequest : ValidationRequest<TModel>
