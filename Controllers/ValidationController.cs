@@ -3,10 +3,12 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Core;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
+    using Shared;
 
+    [Route("v1/[controller]/[action]")]
+    [ApiController]
     public abstract class ValidationController<TModel> : ControllerBase
     {
         protected readonly IMediator Mediator;

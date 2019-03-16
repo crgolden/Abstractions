@@ -3,9 +3,9 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Core;
     using MediatR;
     using Microsoft.Extensions.Logging;
+    using Shared;
 
     public abstract class ValidateNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
         where TNotification : ValidateNotification<TModel>

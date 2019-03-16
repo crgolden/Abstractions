@@ -5,7 +5,7 @@
     using MediatR;
     using Shared;
 
-    public abstract class CreateRangeNotification<TModel> : INotification
+    public abstract class UpdateRangeNotification<TModel> : INotification
     {
         public EventIds EventId { get; set; }
 

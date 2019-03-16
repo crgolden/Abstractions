@@ -7,12 +7,12 @@
     using Microsoft.Extensions.Logging;
     using Shared;
 
-    public abstract class CreateRangeNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
-        where TNotification : CreateRangeNotification<TModel>
+    public abstract class ReadRangeNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
+        where TNotification : ReadRangeNotification<TModel>
     {
-        private readonly ILogger<CreateRangeNotificationHandler<TNotification, TModel>> _logger;
+        private readonly ILogger<ReadRangeNotificationHandler<TNotification, TModel>> _logger;
 
-        protected CreateRangeNotificationHandler(ILogger<CreateRangeNotificationHandler<TNotification, TModel>> logger)
+        protected ReadRangeNotificationHandler(ILogger<ReadRangeNotificationHandler<TNotification, TModel>> logger)
         {
             _logger = logger;
         }
@@ -22,24 +22,24 @@
             var eventId = new EventId((int)notification.EventId, $"{notification.EventId}");
             switch (notification.EventId)
             {
-                case EventIds.CreateRangeStart:
+                case EventIds.ReadRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Creating models {Models} at {Time}",
-                        args: new object[] { notification.Models, DateTime.UtcNow });
+                        message: "Details requested for key value(s) {KeyValues} at {Time}",
+                        args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
-                case EventIds.CreateRangeEnd:
+                case EventIds.ReadRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Created models {Models} at {Time}",
+                        message: "Details found for models {Models} at {Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
-                case EventIds.CreateRangeError:
+                case EventIds.ReadRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error creating models {Models} at {Time}",
-                        args: new object[] { notification.Models, DateTime.UtcNow });
+                        message: "Error finding details for key value(s) {KeyValues} at {Time}",
+                        args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
             }
 

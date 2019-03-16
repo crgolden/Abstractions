@@ -2,12 +2,12 @@
 {
     using MediatR;
 
-    public abstract class CreateRangeRequest<TEntity, TModel> : IRequest<TModel[]>
+    public abstract class UpdateRangeRequest<TEntity, TModel> : IRequest
         where TEntity : class
     {
         public readonly TModel[] Models;
 
-        protected CreateRangeRequest(TModel[] models)
+        protected UpdateRangeRequest(TModel[] models)
         {
             Models = models;
         }

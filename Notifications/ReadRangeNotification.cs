@@ -5,9 +5,11 @@
     using MediatR;
     using Shared;
 
-    public abstract class CreateRangeNotification<TModel> : INotification
+    public abstract class ReadRangeNotification<TModel> : INotification
     {
         public EventIds EventId { get; set; }
+
+        public object[][] KeyValues { get; set; }
 
         public IEnumerable<TModel> Models { get; set; }
 

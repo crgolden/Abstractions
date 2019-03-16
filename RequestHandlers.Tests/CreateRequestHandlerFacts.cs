@@ -17,7 +17,7 @@
         {
             // Arrange
             var entity = new FakeEntity("Name");
-            var model = Mock.Of<object>();
+            var model = new object();
             var databaseName = $"{DatabaseNamePrefix}.{nameof(Create)}";
             var options = new DbContextOptionsBuilder<FakeContext>()
                 .UseInMemoryDatabase(databaseName)

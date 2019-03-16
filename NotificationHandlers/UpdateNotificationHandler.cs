@@ -7,12 +7,12 @@
     using Microsoft.Extensions.Logging;
     using Shared;
 
-    public abstract class CreateNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
-        where TNotification : CreateNotification<TModel>
+    public abstract class UpdateNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
+        where TNotification : UpdateNotification<TModel>
     {
-        private readonly ILogger<CreateNotificationHandler<TNotification, TModel>> _logger;
+        private readonly ILogger<UpdateNotificationHandler<TNotification, TModel>> _logger;
 
-        protected CreateNotificationHandler(ILogger<CreateNotificationHandler<TNotification, TModel>> logger)
+        protected UpdateNotificationHandler(ILogger<UpdateNotificationHandler<TNotification, TModel>> logger)
         {
             _logger = logger;
         }
@@ -22,23 +22,23 @@
             var eventId = new EventId((int)notification.EventId, $"{notification.EventId}");
             switch (notification.EventId)
             {
-                case EventIds.CreateStart:
+                case EventIds.UpdateStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Creating model {Model} at {Time}",
+                        message: "Updating model {Model} at {Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
-                case EventIds.CreateEnd:
+                case EventIds.UpdateEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Created model {Model} at {Time}",
+                        message: "Updated model {Model} at {Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
-                case EventIds.CreateError:
+                case EventIds.UpdateError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error creating model {Model} at {Time}",
+                        message: "Error updating model {Model} at {Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
             }

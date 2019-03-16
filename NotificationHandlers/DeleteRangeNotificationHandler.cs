@@ -7,12 +7,12 @@
     using Microsoft.Extensions.Logging;
     using Shared;
 
-    public abstract class DeleteNotificationHandler<TNotification> : INotificationHandler<TNotification>
-        where TNotification : DeleteNotification
+    public abstract class DeleteRangeNotificationHandler<TNotification> : INotificationHandler<TNotification>
+        where TNotification : DeleteRangeNotification
     {
-        private readonly ILogger<DeleteNotificationHandler<TNotification>> _logger;
+        private readonly ILogger<DeleteRangeNotificationHandler<TNotification>> _logger;
 
-        protected DeleteNotificationHandler(ILogger<DeleteNotificationHandler<TNotification>> logger)
+        protected DeleteRangeNotificationHandler(ILogger<DeleteRangeNotificationHandler<TNotification>> logger)
         {
             _logger = logger;
         }
@@ -22,23 +22,23 @@
             var eventId = new EventId((int)notification.EventId, $"{notification.EventId}");
             switch (notification.EventId)
             {
-                case EventIds.DeleteStart:
+                case EventIds.DeleteRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Deleting entity with key values {KeyValues} at {Time}",
+                        message: "Deleting entities with key values {KeyValues} at {Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
-                case EventIds.DeleteEnd:
+                case EventIds.DeleteRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Deleted entity with key values {KeyValues} at {Time}",
+                        message: "Deleted entities with key values {KeyValues} at {Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
-                case EventIds.DeleteError:
+                case EventIds.DeleteRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error deleting entity with key values {KeyValues} at {Time}",
+                        message: "Error deleting entities with key values {KeyValues} at {Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
             }

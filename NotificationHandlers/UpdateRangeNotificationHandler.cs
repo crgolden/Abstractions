@@ -7,12 +7,12 @@
     using Microsoft.Extensions.Logging;
     using Shared;
 
-    public abstract class CreateRangeNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
-        where TNotification : CreateRangeNotification<TModel>
+    public abstract class UpdateRangeNotificationHandler<TNotification, TModel> : INotificationHandler<TNotification>
+        where TNotification : UpdateRangeNotification<TModel>
     {
-        private readonly ILogger<CreateRangeNotificationHandler<TNotification, TModel>> _logger;
+        private readonly ILogger<UpdateRangeNotificationHandler<TNotification, TModel>> _logger;
 
-        protected CreateRangeNotificationHandler(ILogger<CreateRangeNotificationHandler<TNotification, TModel>> logger)
+        protected UpdateRangeNotificationHandler(ILogger<UpdateRangeNotificationHandler<TNotification, TModel>> logger)
         {
             _logger = logger;
         }
@@ -22,23 +22,23 @@
             var eventId = new EventId((int)notification.EventId, $"{notification.EventId}");
             switch (notification.EventId)
             {
-                case EventIds.CreateRangeStart:
+                case EventIds.UpdateRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Creating models {Models} at {Time}",
+                        message: "Updating models {Models} at {Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
-                case EventIds.CreateRangeEnd:
+                case EventIds.UpdateRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Created models {Models} at {Time}",
+                        message: "Updated models {Models} at {Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
-                case EventIds.CreateRangeError:
+                case EventIds.UpdateRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error creating models {Models} at {Time}",
+                        message: "Error updating models {Models} at {Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
             }

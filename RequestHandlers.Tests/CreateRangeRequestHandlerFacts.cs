@@ -1,7 +1,5 @@
 ﻿namespace Clarity.Abstractions.RequestHandlers.Tests
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -29,19 +27,19 @@
             };
             var models = new []
             {
-                Mock.Of<object>(),
-                Mock.Of<object>(),
-                Mock.Of<object>()
+                new object(),
+                new object(),
+                new object()
             };
             var databaseName = $"{DatabaseNamePrefix}.{nameof(CreateRange)}";
             var options = new DbContextOptionsBuilder<FakeContext>()
                 .UseInMemoryDatabase(databaseName)
                 .Options;
-            var request = new Mock<CreateRangeRequest<IEnumerable<object>, FakeEntity, object>>(models.AsEnumerable());
+            var request = new Mock<CreateRangeRequest<FakeEntity, object>>(new object[] { models });
             var mapper = new Mock<IMapper>();
-            mapper.Setup(x => x.Map<IEnumerable<FakeEntity>>(It.IsAny<IEnumerable<object>>())).Returns(entities);
-            mapper.Setup(x => x.Map<IEnumerable<object>>(It.IsAny<IEnumerable<FakeEntity>>())).Returns(models.AsEnumerable());
-            IEnumerable<object> createRange;
+            mapper.Setup(x => x.Map<FakeEntity[]>(It.IsAny<object[]>())).Returns(entities);
+            mapper.Setup(x => x.Map<object[]>(It.IsAny<FakeEntity[]>())).Returns(models);
+            object[] createRange;
 
             // Act
             using (var context = new FakeContext(options))
@@ -51,7 +49,7 @@
             }
 
             // Assert
-            Assert.Equal(models.Length, createRange.Count());
+            Assert.Equal(models.Length, createRange.Length);
             using (var context = new FakeContext(options))
             {
                 foreach (var entity in entities)

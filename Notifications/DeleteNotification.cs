@@ -1,8 +1,8 @@
 ﻿namespace Clarity.Abstractions
 {
     using System;
-    using Core;
     using MediatR;
+    using Shared;
 
     public abstract class DeleteNotification : INotification
     {
