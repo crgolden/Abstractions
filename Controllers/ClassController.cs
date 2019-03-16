@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Shared;
 
+    [Produces("application/json")]
     [Route("v1/[controller]/[action]")]
     [ApiController]
     public abstract class ClassController<TEntity, TModel, TKey> : ControllerBase

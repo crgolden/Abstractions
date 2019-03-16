@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Shared;
 
+    [Produces("application/json")]
     [Route("v1/[controller]/[action]")]
     [ApiController]
     public abstract class ValidationController<TModel> : ControllerBase
