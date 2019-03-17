@@ -36,6 +36,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<OkObjectResult>(list);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<ListNotification>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(dataSourceResult, result.Value);
         }
 
@@ -56,6 +59,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<OkObjectResult>(read);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<ReadNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(model, result.Value);
         }
 
@@ -75,6 +81,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<BadRequestObjectResult>(read);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<ReadNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(keyValues, result.Value);
         }
 
@@ -94,6 +103,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<NotFoundObjectResult>(read);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<ReadNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(keyValues, result.Value);
         }
 
@@ -109,6 +121,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             Assert.IsType<NoContentResult>(update);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<UpdateNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -127,6 +142,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<BadRequestObjectResult>(update);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<UpdateNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(model, result.Value);
         }
 
@@ -146,6 +164,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<OkObjectResult>(create);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<CreateNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(model, result.Value);
         }
 
@@ -165,6 +186,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<BadRequestObjectResult>(create);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<CreateNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(model, result.Value);
         }
 
@@ -180,6 +204,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             Assert.IsType<NoContentResult>(delete);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<DeleteNotification>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -198,6 +225,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<BadRequestObjectResult>(delete);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<DeleteNotification>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(keyValues, result.Value);
         }
     }

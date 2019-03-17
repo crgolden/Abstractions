@@ -21,7 +21,7 @@
         {
             var tasks = request.KeyValues.Select(x => Context.FindAsync<TEntity>(x, token));
             var entities = await Task.WhenAll(tasks).ConfigureAwait(false);
-            Context.Set<TEntity>().RemoveRange(entities);
+            foreach (var entity in entities) Context.Entry(entity).State = EntityState.Deleted;
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
             return Unit.Value;
         }

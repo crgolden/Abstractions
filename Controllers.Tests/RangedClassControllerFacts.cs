@@ -35,6 +35,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             Assert.IsType<NoContentResult>(updateRange);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<UpdateRangeNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
         }
 
         [Fact]
@@ -58,6 +61,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<BadRequestObjectResult>(updateRange);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<UpdateRangeNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(models, result.Value);
         }
 
@@ -82,6 +88,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<OkObjectResult>(createRange);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<CreateRangeNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(models, result.Value);
         }
 
@@ -106,6 +115,9 @@ namespace Clarity.Abstractions.Controllers.Tests
 
             // Assert
             var result = Assert.IsType<BadRequestObjectResult>(createRange);
+            _mediator.Verify(x => x.Publish(
+                It.IsAny<CreateRangeNotification<object>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(2));
             Assert.Equal(models, result.Value);
         }
     }

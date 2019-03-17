@@ -22,6 +22,7 @@
         public virtual async Task<TModel[]> Handle(TRequest request, CancellationToken token)
         {
             var entities = Mapper.Map<TEntity[]>(request.Models);
+            foreach (var entity in entities) Context.Entry(entity).State = EntityState.Added;
             Context.Set<TEntity>().AddRange(entities);
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
             return Mapper.Map<TModel[]>(entities);

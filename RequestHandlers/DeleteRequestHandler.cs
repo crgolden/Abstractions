@@ -19,7 +19,7 @@
         public virtual async Task<Unit> Handle(TRequest request, CancellationToken token)
         {
             var entity = await Context.FindAsync<TEntity>(request.KeyValues, token).ConfigureAwait(false);
-            Context.Remove(entity);
+            Context.Entry(entity).State = EntityState.Deleted;
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
             return Unit.Value;
         }

@@ -22,7 +22,7 @@
         public virtual async Task<TModel> Handle(TRequest request, CancellationToken token)
         {
             var entity = Mapper.Map<TEntity>(request.Model);
-            Context.Add(entity);
+            Context.Entry(entity).State = EntityState.Added;
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
             return Mapper.Map<TModel>(entity);
         }
