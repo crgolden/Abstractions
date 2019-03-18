@@ -25,20 +25,20 @@
                 case EventIds.ListStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Searching request {Request} at {Time}",
+                        message: "Searching request {@Request} at {@Time}",
                         args: new object[] { notification.Request, DateTime.UtcNow });
                     break;
                 case EventIds.ListEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Found result {Result} at {Time}",
+                        message: "Found result {@Result} at {@Time}",
                         args: new object[] { notification.Result, DateTime.UtcNow });
                     break;
                 case EventIds.ListError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error searching request {Request} at {Time}",
+                        message: "Error searching request {@Request} at {@Time}",
                         args: new object[] { notification.Request, DateTime.UtcNow });
                     break;
             }

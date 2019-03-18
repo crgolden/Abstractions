@@ -25,20 +25,20 @@
                 case EventIds.DeleteRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Deleting entities with key values {KeyValues} at {Time}",
+                        message: "Deleting entities with key values {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.DeleteRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Deleted entities with key values {KeyValues} at {Time}",
+                        message: "Deleted entities with key values {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.DeleteRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error deleting entities with key values {KeyValues} at {Time}",
+                        message: "Error deleting entities with key values {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
             }

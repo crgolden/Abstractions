@@ -25,26 +25,26 @@
                 case EventIds.ReadStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Details requested for key value(s) {KeyValues} at {Time}",
+                        message: "Details requested for key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.ReadNotFound:
                     _logger.LogWarning(
                         eventId: eventId,
-                        message: "Details not found for key value(s) {KeyValues} at {Time}",
+                        message: "Details not found for key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.ReadEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Details found for model {Model} at {Time}",
+                        message: "Details found for model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.ReadError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error finding details for key value(s) {KeyValues} at {Time}",
+                        message: "Error finding details for key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
             }

@@ -25,20 +25,20 @@
                 case EventIds.CreateStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Creating model {Model} at {Time}",
+                        message: "Creating model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.CreateEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Created model {Model} at {Time}",
+                        message: "Created model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.CreateError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error creating model {Model} at {Time}",
+                        message: "Error creating model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
             }

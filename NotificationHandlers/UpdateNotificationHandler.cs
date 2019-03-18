@@ -25,20 +25,20 @@
                 case EventIds.UpdateStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Updating model {Model} at {Time}",
+                        message: "Updating model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.UpdateEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Updated model {Model} at {Time}",
+                        message: "Updated model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.UpdateError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error updating model {Model} at {Time}",
+                        message: "Error updating model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
             }

@@ -25,20 +25,20 @@
                 case EventIds.ReadRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Details requested for key value(s) {KeyValues} at {Time}",
+                        message: "Details requested for key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.ReadRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Details found for models {Models} at {Time}",
+                        message: "Details found for models {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
                 case EventIds.ReadRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error finding details for key value(s) {KeyValues} at {Time}",
+                        message: "Error finding details for key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
             }

@@ -25,20 +25,20 @@
                 case EventIds.ValidateStart:
                     Logger.LogInformation(
                         eventId: eventId,
-                        message: "Validating model {Model} at {Time}",
+                        message: "Validating model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.ValidateEnd:
                     Logger.LogInformation(
                         eventId: eventId,
-                        message: "Validated model {Model} at {Time}",
+                        message: "Validated model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
                 case EventIds.ValidateError:
                     Logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error validating model {Model} at {Time}",
+                        message: "Error validating model {@Model} at {@Time}",
                         args: new object[] { notification.Model, DateTime.UtcNow });
                     break;
             }
