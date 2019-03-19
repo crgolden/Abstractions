@@ -5,7 +5,7 @@
     <RootNamespace>Clarity.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
     <PackageId>Clarity.Abstractions.NotificationHandlers</PackageId>
-    <Version>1.6.1</Version>
+    <Version>1.6.2</Version>
     <Company>Clarity</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>

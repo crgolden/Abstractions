@@ -25,20 +25,20 @@
                 case EventIds.CreateRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Creating models {@Models} at {@Time}",
+                        message: "Creating model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
                 case EventIds.CreateRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Created models {@Models} at {@Time}",
+                        message: "Created model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
                 case EventIds.CreateRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error creating models {@Models} at {@Time}",
+                        message: "Error creating model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
             }

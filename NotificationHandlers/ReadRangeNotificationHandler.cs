@@ -31,7 +31,7 @@
                 case EventIds.ReadRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Details found for models {@Models} at {@Time}",
+                        message: "Details found for model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
                 case EventIds.ReadRangeError:

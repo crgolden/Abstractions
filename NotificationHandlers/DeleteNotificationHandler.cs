@@ -25,20 +25,20 @@
                 case EventIds.DeleteStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Deleting entity with key values {@KeyValues} at {@Time}",
+                        message: "Deleting model with key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.DeleteEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Deleted entity with key values {@KeyValues} at {@Time}",
+                        message: "Deleted model with key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
                 case EventIds.DeleteError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error deleting entity with key values {@KeyValues} at {@Time}",
+                        message: "Error deleting model with key value(s) {@KeyValues} at {@Time}",
                         args: new object[] { notification.KeyValues, DateTime.UtcNow });
                     break;
             }

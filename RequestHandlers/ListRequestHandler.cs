@@ -23,7 +23,7 @@
 
         public virtual async Task<DataSourceResult> Handle(TRequest request, CancellationToken token)
         {
-            var entities = Context.Set<TEntity>();
+            var entities = Context.Set<TEntity>().AsNoTracking();
             return await Mapper
                 .ProjectTo<TModel>(entities)
                 .ToDataSourceResultAsync(request.Request, request.ModelState)

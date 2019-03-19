@@ -25,20 +25,20 @@
                 case EventIds.UpdateRangeStart:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Updating models {@Models} at {@Time}",
+                        message: "Updating model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
                 case EventIds.UpdateRangeEnd:
                     _logger.LogInformation(
                         eventId: eventId,
-                        message: "Updated models {@Models} at {@Time}",
+                        message: "Updated model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
                 case EventIds.UpdateRangeError:
                     _logger.LogError(
                         eventId: eventId,
                         exception: notification.Exception,
-                        message: "Error updating models {@Models} at {@Time}",
+                        message: "Error updating model(s) {@Models} at {@Time}",
                         args: new object[] { notification.Models, DateTime.UtcNow });
                     break;
             }
