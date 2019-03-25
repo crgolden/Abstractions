@@ -5,23 +5,31 @@
     using System.Threading.Tasks;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
 
     public abstract class DeleteRangeRequestHandler<TRequest, TEntity> : IRequestHandler<TRequest>
         where TRequest : DeleteRangeRequest
         where TEntity : class
     {
         protected readonly DbContext Context;
+        protected readonly IMemoryCache Cache;
 
-        protected DeleteRangeRequestHandler(DbContext context)
+        protected DeleteRangeRequestHandler(DbContext context, IMemoryCache cache)
         {
             Context = context;
+            Cache = cache;
         }
 
         public virtual async Task<Unit> Handle(TRequest request, CancellationToken token)
         {
-            var tasks = request.KeyValues.Select(x => Context.FindAsync<TEntity>(x, token));
-            var entities = await Task.WhenAll(tasks).ConfigureAwait(false);
-            Context.Set<TEntity>().RemoveRange(entities);
+            foreach (var keyValues in request.KeyValues)
+            {
+                var entity = await Context.FindAsync<TEntity>(keyValues, token).ConfigureAwait(false);
+                var entityEntry = Context.Entry(entity);
+                entityEntry.State = EntityState.Deleted;
+                Cache.Remove(keyValues);
+            }
+
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
             return Unit.Value;
         }

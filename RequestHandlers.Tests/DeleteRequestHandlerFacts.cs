@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -27,12 +28,14 @@
             }
 
             var keyValues = new object[] { entity.Id };
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
             var request = new Mock<DeleteRequest>(new object[] { keyValues });
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeDeleteRequestHandler(context);
+                var requestHandler = new FakeDeleteRequestHandler(context, cache.Object);
                 await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 

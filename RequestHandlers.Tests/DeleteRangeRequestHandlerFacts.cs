@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -15,40 +16,36 @@
         public async Task DeleteRange()
         {
             // Arrange
-            var entities = new []
-            {
-                new FakeEntity("Name 1"),
-                new FakeEntity("Name 2"),
-                new FakeEntity("Name 3")
-            };
+            const int count = 3;
+            var entities = new FakeEntity[count];
+            var keyValues = new object[count][];
             var databaseName = $"{DatabaseNamePrefix}.{nameof(DeleteRange)}";
             var options = new DbContextOptionsBuilder<FakeContext>()
                 .UseInMemoryDatabase(databaseName)
                 .Options;
             using (var context = new FakeContext(options))
             {
+                for (var i = 0; i < count; i++) entities[i] = new FakeEntity($"Name {i + 1}");
                 context.Set<FakeEntity>().AddRange(entities);
                 await context.SaveChangesAsync();
             }
-            var keyValues = new[]
-            {
-                new object[] { entities[0].Id },
-                new object[] { entities[1].Id },
-                new object[] { entities[2].Id }
-            };
-            var request = new Mock<DeleteRangeRequest>(new object[] { keyValues });
 
+            for (var i = 0; i < count; i++) keyValues[i] = new object[] { entities[i].Id };
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var request = new Mock<DeleteRangeRequest>(new object[] { keyValues });
+            
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeDeleteRangeRequestHandler(context);
+                var requestHandler = new FakeDeleteRangeRequestHandler(context, cache.Object);
                 await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 
             // Assert
             using (var context = new FakeContext(options))
             {
-                for (var i = 0; i < entities.Length; i++)
+                for (var i = 0; i < count; i++)
                 {
                     Assert.Null(await context.FindAsync<FakeEntity>(keyValues[i]));
                 }

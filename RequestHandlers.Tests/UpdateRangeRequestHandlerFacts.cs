@@ -5,6 +5,7 @@
     using AutoMapper;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -16,52 +17,47 @@
         public async Task UpdateRange()
         {
             // Arrange
-            var entities = new []
-            {
-                new FakeEntity("Name 1"),
-                new FakeEntity("Name 2"),
-                new FakeEntity("Name 3")
-            };
-            var models = new []
-            {
-                new object(),
-                new object(),
-                new object()
-            };
+            const int count = 3;
+            var entities = new FakeEntity[count];
+            var models = new object[count];
             var databaseName = $"{DatabaseNamePrefix}.{nameof(UpdateRange)}";
             var options = new DbContextOptionsBuilder<FakeContext>()
                 .UseInMemoryDatabase(databaseName)
                 .Options;
-
             using (var context = new FakeContext(options))
             {
+                for (var i = 0; i < count; i++) entities[i] = new FakeEntity($"Name {i + 1}");
                 context.Set<FakeEntity>().AddRange(entities);
                 await context.SaveChangesAsync();
             }
 
-            for (var i = 0; i < entities.Length; i++)
+            var mapper = new Mock<IMapper>();
+            for (var i = 0; i < count; i++)
             {
-                entities[i].Name = $"New Name {i}";
+                var model = new object();
+                models[i] = model;
+                entities[i].Name = $"New Name {i + 1}";
+                mapper.Setup(x => x.Map<FakeEntity>(model)).Returns(entities[i]);
             }
 
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
             var request = new Mock<UpdateRangeRequest<FakeEntity, object>>(new object[] { models });
-            var mapper = new Mock<IMapper>();
-            mapper.Setup(x => x.Map<FakeEntity[]>(It.IsAny<object[]>())).Returns(entities);
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeUpdateRangeRequestHandler(context, mapper.Object);
+                var requestHandler = new FakeUpdateRangeRequestHandler(context, mapper.Object, cache.Object);
                 await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 
             // Assert
             using (var context = new FakeContext(options))
             {
-                for (var i = 0; i < entities.Length; i++)
+                for (var i = 0; i < count; i++)
                 {
-                    var name = $"New Name {i}";
-                    Assert.NotNull(await context.Set<FakeEntity>().SingleOrDefaultAsync(x => x.Name.Equals(name)));
+                    var name = $"New Name {i + 1}";
+                    Assert.NotNull(await context.Set<FakeEntity>().SingleOrDefaultAsync(x => x.Name == name));
                 }
             }
         }

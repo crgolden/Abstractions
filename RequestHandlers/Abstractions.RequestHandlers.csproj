@@ -5,7 +5,7 @@
     <RootNamespace>Clarity.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
     <PackageId>Clarity.Abstractions.RequestHandlers</PackageId>
-    <Version>1.6.1</Version>
+    <Version>1.6.2</Version>
     <Company>Clarity</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>
@@ -24,7 +24,9 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="Clarity.Shared.Interfaces" Version="1.0.0" />
+    <PackageReference Include="Clarity.Shared.Options" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
     <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
   </ItemGroup>
 

@@ -1,10 +1,13 @@
 ﻿namespace Clarity.Abstractions
 {
+    using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
 
     public abstract class CreateRangeRequestHandler<TRequest, TEntity, TModel> : IRequestHandler<TRequest, TModel[]>
         where TRequest : CreateRangeRequest<TEntity, TModel>
@@ -12,19 +15,39 @@
     {
         protected readonly DbContext Context;
         protected readonly IMapper Mapper;
+        protected readonly IMemoryCache Cache;
 
-        protected CreateRangeRequestHandler(DbContext context, IMapper mapper)
+        protected CreateRangeRequestHandler(DbContext context, IMapper mapper, IMemoryCache cache)
         {
             Context = context;
             Mapper = mapper;
+            Cache = cache;
         }
 
         public virtual async Task<TModel[]> Handle(TRequest request, CancellationToken token)
         {
-            var entities = Mapper.Map<TEntity[]>(request.Models);
-            Context.Set<TEntity>().AddRange(entities);
+            var models = new TModel[request.Models.Length];
+            for (var i = 0; i < request.Models.Length; i++)
+            {
+                var entity = Mapper.Map<TEntity>(request.Models[i]);
+                var entityEntry = Context.Entry(entity);
+                entityEntry.State = EntityState.Added;
+                models[i] = Mapper.Map<TModel>(entity);
+                var keyValues = entityEntry.Metadata
+                    .FindPrimaryKey()
+                    .Properties
+                    .Select(y => entityEntry.Property(y.Name).CurrentValue)
+                    .ToArray();
+                using (var cacheEntry = Cache.CreateEntry(keyValues))
+                {
+                    cacheEntry.SlidingExpiration = TimeSpan.FromSeconds(30);
+                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+                    cacheEntry.SetValue(models[i]);
+                }
+            }
+
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
-            return Mapper.Map<TModel[]>(entities);
+            return models;
         }
     }
 }

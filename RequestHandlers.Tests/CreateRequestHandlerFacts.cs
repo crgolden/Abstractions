@@ -5,6 +5,7 @@
     using AutoMapper;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -22,16 +23,18 @@
             var options = new DbContextOptionsBuilder<FakeContext>()
                 .UseInMemoryDatabase(databaseName)
                 .Options;
-            var request = new Mock<CreateRequest<FakeEntity, object>>(model);
             var mapper = new Mock<IMapper>();
             mapper.Setup(x => x.Map<FakeEntity>(model)).Returns(entity);
             mapper.Setup(x => x.Map<object>(It.Is<FakeEntity>(y => y.Name == entity.Name))).Returns(model);
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var request = new Mock<CreateRequest<FakeEntity, object>>(model);
             object create;
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeCreateRequestHandler(context, mapper.Object);
+                var requestHandler = new FakeCreateRequestHandler(context, mapper.Object, cache.Object);
                 create = await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 

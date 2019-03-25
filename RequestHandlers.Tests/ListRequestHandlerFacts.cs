@@ -10,6 +10,7 @@
     using Fakes;
     using Kendo.Mvc.UI;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -21,48 +22,47 @@
         public async Task List()
         {
             // Arrange
-            var entities = new []
-            {
-                new FakeEntity("Name 1"),
-                new FakeEntity("Name 2"),
-                new FakeEntity("Name 3")
-            };
-            var models = new []
-            {
-                new object(),
-                new object(),
-                new object()
-            }.AsQueryable();
+            const int count = 3;
+            var entities = new FakeEntity[count];
+            var models = new object[count];
             var databaseName = $"{DatabaseNamePrefix}.{nameof(List)}";
             var options = new DbContextOptionsBuilder<FakeContext>()
                 .UseInMemoryDatabase(databaseName)
                 .Options;
+            for (var i = 0; i < count; i++)
+            {
+                entities[i] = new FakeEntity($"Name {i + 1}");
+                models[i] = new object();
+            }
+
             using (var context = new FakeContext(options))
             {
                 context.Set<FakeEntity>().AddRange(entities);
                 await context.SaveChangesAsync();
             }
 
-            var request = new Mock<ListRequest<FakeEntity, object>>(null, new DataSourceRequest());
             var mapper = new Mock<IMapper>();
             mapper.Setup(x => x.ProjectTo(
                     It.IsAny<IQueryable>(),
                     It.IsAny<object>(),
                     It.IsAny<Expression<Func<object, object>>[] > ()))
-                .Returns(models);
+                .Returns(models.AsQueryable());
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<DataSourceRequest>())).Returns(Mock.Of<ICacheEntry>());
+            var request = new Mock<ListRequest<FakeEntity, object>>(null, new DataSourceRequest());
             DataSourceResult list;
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeListRequestHandler(context, mapper.Object);
+                var requestHandler = new FakeListRequestHandler(context, mapper.Object, cache.Object);
                 list = await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 
             // Assert
             var result = Assert.IsType<DataSourceResult>(list);
             var data = Assert.IsAssignableFrom<IEnumerable<object>>(result.Data);
-            Assert.Equal(models.AsEnumerable().Count(), data.Count());
+            Assert.Equal(count, data.Count());
         }
     }
 }
