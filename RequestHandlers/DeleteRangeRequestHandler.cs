@@ -28,6 +28,19 @@
                 var entityEntry = Context.Entry(entity);
                 entityEntry.State = EntityState.Deleted;
                 Cache.Remove(keyValues);
+                foreach (var collection in entityEntry.Collections.Select(x => x.CurrentValue))
+                {
+                    foreach (var item in collection)
+                    {
+                        var itemEntry = Context.Entry(item);
+                        var itemKeyValues = itemEntry.Metadata
+                            .FindPrimaryKey()
+                            .Properties
+                            .Select(x => entityEntry.Property(x.Name).CurrentValue)
+                            .ToArray();
+                        Cache.Remove(itemKeyValues);
+                    }
+                }
             }
 
             await Context.SaveChangesAsync(token).ConfigureAwait(false);

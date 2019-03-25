@@ -1,5 +1,6 @@
 ﻿namespace Clarity.Abstractions
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
@@ -25,6 +26,20 @@
             var entityEntry = Context.Entry(entity);
             entityEntry.State = EntityState.Deleted;
             Cache.Remove(request.KeyValues);
+            foreach (var collection in entityEntry.Collections.Select(x => x.CurrentValue))
+            {
+                foreach (var item in collection)
+                {
+                    var itemEntry = Context.Entry(item);
+                    var keyValues = itemEntry.Metadata
+                        .FindPrimaryKey()
+                        .Properties
+                        .Select(x => entityEntry.Property(x.Name).CurrentValue)
+                        .ToArray();
+                    Cache.Remove(keyValues);
+                }
+            }
+
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
             return Unit.Value;
         }

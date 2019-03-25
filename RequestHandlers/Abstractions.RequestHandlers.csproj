@@ -5,7 +5,7 @@
     <RootNamespace>Clarity.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
     <PackageId>Clarity.Abstractions.RequestHandlers</PackageId>
-    <Version>1.6.3</Version>
+    <Version>1.6.4</Version>
     <Company>Clarity</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>
