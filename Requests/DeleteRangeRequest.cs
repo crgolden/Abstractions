@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public abstract class DeleteRangeRequest : IRequest
+    public abstract class DeleteRangeRequest : IRequest<object[][]>
     {
         public readonly object[][] KeyValues;
 

@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public abstract class DeleteRequest : IRequest
+    public abstract class DeleteRequest : IRequest<object[][]>
     {
         public readonly object[] KeyValues;
 

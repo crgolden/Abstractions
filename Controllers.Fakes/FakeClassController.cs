@@ -6,11 +6,15 @@
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Options;
     using Moq;
+    using Shared;
 
     internal class FakeClassController : ClassController<object, object, object>
     {
-        public FakeClassController(IMediator mediator) : base(mediator)
+        public FakeClassController(IMediator mediator, IMemoryCache cache, IOptions<CacheOptions> cacheOptions)
+            : base(mediator, cache, cacheOptions)
         {
         }
 

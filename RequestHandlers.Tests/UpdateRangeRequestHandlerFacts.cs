@@ -5,7 +5,6 @@
     using AutoMapper;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -40,14 +39,12 @@
                 mapper.Setup(x => x.Map<FakeEntity>(model)).Returns(entities[i]);
             }
 
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
             var request = new Mock<UpdateRangeRequest<FakeEntity, object>>(new object[] { models });
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeUpdateRangeRequestHandler(context, mapper.Object, cache.Object);
+                var requestHandler = new FakeUpdateRangeRequestHandler(context, mapper.Object);
                 await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 

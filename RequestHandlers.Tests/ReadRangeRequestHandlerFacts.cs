@@ -5,7 +5,6 @@
     using AutoMapper;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -32,24 +31,21 @@
                 await context.SaveChangesAsync();
             }
 
-            var mapper = new Mock<IMapper>();
             for (var i = 0; i < count; i++)
             {
-                var entity = entities[i];
                 models[i] = new object();
-                keyValues[i] = new object[] { entity.Id };
-                mapper.Setup(x => x.Map<object>(It.Is<FakeEntity>(y => y.Id == entity.Id))).Returns(models[i]);
+                keyValues[i] = new object[] { entities[i].Id };
             }
 
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var mapper = new Mock<IMapper>();
+            mapper.Setup(x => x.Map<object[]>(It.IsAny<FakeEntity[]>())).Returns(models);
             var request = new Mock<ReadRangeRequest<FakeEntity, object>>(new object[] { keyValues });
             object[] readRange;
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeReadRangeRequestHandler(context, mapper.Object, cache.Object);
+                var requestHandler = new FakeReadRangeRequestHandler(context, mapper.Object);
                 readRange = await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 

@@ -5,7 +5,7 @@
     public abstract class ReadRangeRequest<TEntity, TModel> : IRequest<TModel[]>
         where TEntity : class
     {
-        public readonly object[][] KeyValues;
+        public object[][] KeyValues { get; set; }
 
         protected ReadRangeRequest(object[][] keyValues)
         {

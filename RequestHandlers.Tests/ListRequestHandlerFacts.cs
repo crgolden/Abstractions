@@ -10,7 +10,6 @@
     using Fakes;
     using Kendo.Mvc.UI;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Caching.Memory;
     using Moq;
     using Xunit;
 
@@ -47,15 +46,13 @@
                     It.IsAny<object>(),
                     It.IsAny<Expression<Func<object, object>>[] > ()))
                 .Returns(models.AsQueryable());
-            var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<DataSourceRequest>())).Returns(Mock.Of<ICacheEntry>());
             var request = new Mock<ListRequest<FakeEntity, object>>(null, new DataSourceRequest());
             DataSourceResult list;
 
             // Act
             using (var context = new FakeContext(options))
             {
-                var requestHandler = new FakeListRequestHandler(context, mapper.Object, cache.Object);
+                var requestHandler = new FakeListRequestHandler(context, mapper.Object);
                 list = await requestHandler.Handle(request.Object, CancellationToken.None);
             }
 

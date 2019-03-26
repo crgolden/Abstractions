@@ -6,7 +6,10 @@ namespace Clarity.Abstractions.Controllers.Tests
     using Fakes;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Options;
     using Moq;
+    using Shared;
     using Xunit;
 
     public class RangedClassControllerFacts
@@ -28,7 +31,19 @@ namespace Clarity.Abstractions.Controllers.Tests
                 new { Name = "Name 2" },
                 new { Name = "Name 3" }
             };
-            var controller = new FakeRangedClassController(_mediator.Object);
+            var keyValues = new[]
+            {
+                new object[] {new { }},
+                new object[] {new { }},
+                new object[] {new { }}
+            };
+            _mediator.Setup(x => x.Send(
+                    It.Is<UpdateRangeRequest<object, object>>(y => y.Models == models),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(keyValues);
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var controller = new FakeRangedClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var updateRange = await controller.UpdateRange(models);
@@ -51,10 +66,10 @@ namespace Clarity.Abstractions.Controllers.Tests
                 new { Name = "Name 3" }
             };
             _mediator.Setup(x => x.Send(
-                    It.Is<UpdateRangeRequest<object, object>>(y => y.Models.Equals(models)),
+                    It.Is<UpdateRangeRequest<object, object>>(y => y.Models == models),
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception());
-            var controller = new FakeRangedClassController(_mediator.Object);
+            var controller = new FakeRangedClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var updateRange = await controller.UpdateRange(models);
@@ -77,11 +92,19 @@ namespace Clarity.Abstractions.Controllers.Tests
                 new { Name = "Name 2" },
                 new { Name = "Name 3" }
             };
+            var keyValues = new[]
+            {
+                new object[] {new { }},
+                new object[] {new { }},
+                new object[] {new { }}
+            };
             _mediator.Setup(x => x.Send(
-                    It.Is<CreateRangeRequest<object, object>>(y => y.Models.Equals(models)),
+                    It.Is<CreateRangeRequest<object, object>>(y => y.Models == models),
                     It.IsAny<CancellationToken>()))
-                .ReturnsAsync(models);
-            var controller = new FakeRangedClassController(_mediator.Object);
+                .ReturnsAsync((models, keyValues));
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var controller = new FakeRangedClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var createRange = await controller.CreateRange(models);
@@ -105,10 +128,10 @@ namespace Clarity.Abstractions.Controllers.Tests
                 new { Name = "Name 3" }
             };
             _mediator.Setup(x => x.Send(
-                    It.Is<CreateRangeRequest<object, object>>(y => y.Models.Equals(models)),
+                    It.Is<CreateRangeRequest<object, object>>(y => y.Models == models),
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception());
-            var controller = new FakeRangedClassController(_mediator.Object);
+            var controller = new FakeRangedClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var createRange = await controller.CreateRange(models);

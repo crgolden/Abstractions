@@ -5,11 +5,15 @@
     using Kendo.Mvc.UI;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Options;
     using Moq;
+    using Shared;
 
     internal class FakeRangedClassController : RangedClassController<object, object, object>
     {
-        public FakeRangedClassController(IMediator mediator) : base(mediator)
+        public FakeRangedClassController(IMediator mediator, IMemoryCache cache, IOptions<CacheOptions> cacheOptions)
+            : base(mediator, cache, cacheOptions)
         {
         }
 

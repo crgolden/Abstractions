@@ -7,7 +7,10 @@ namespace Clarity.Abstractions.Controllers.Tests
     using Kendo.Mvc.UI;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Options;
     using Moq;
+    using Shared;
     using Xunit;
 
     public class ClassControllerFacts
@@ -26,10 +29,12 @@ namespace Clarity.Abstractions.Controllers.Tests
             var request = new DataSourceRequest();
             var dataSourceResult = new DataSourceResult();
             _mediator.Setup(x => x.Send(
-                    It.Is<ListRequest<object, object>>(y => y.Request.Equals(request)),
+                    It.Is<ListRequest<object, object>>(y => y.Request == request),
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(dataSourceResult);
-            var controller = new FakeClassController(_mediator.Object);
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<DataSourceRequest>())).Returns(Mock.Of<ICacheEntry>());
+            var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var list = await controller.List(request);
@@ -49,10 +54,12 @@ namespace Clarity.Abstractions.Controllers.Tests
             var model = new { Name = "Name", Id = Guid.NewGuid() };
             var keyValues = new object[] { model.Id };
             _mediator.Setup(x => x.Send(
-                    It.Is<ReadRequest<object, object>>(y => y.KeyValues[0].Equals(keyValues[0])),
+                    It.Is<ReadRequest<object, object>>(y => y.KeyValues[0] == keyValues[0]),
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(model);
-            var controller = new FakeClassController(_mediator.Object);
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var read = await controller.Read(keyValues);
@@ -71,10 +78,10 @@ namespace Clarity.Abstractions.Controllers.Tests
             // Arrange
             var keyValues = new object[] { Guid.NewGuid() };
             _mediator.Setup(x => x.Send(
-                    It.Is<ReadRequest<object, object>>(y => y.KeyValues[0].Equals(keyValues[0])),
+                    It.Is<ReadRequest<object, object>>(y => y.KeyValues[0] == keyValues[0]),
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception());
-            var controller = new FakeClassController(_mediator.Object);
+            var controller = new FakeClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var read = await controller.Read(keyValues);
@@ -93,10 +100,10 @@ namespace Clarity.Abstractions.Controllers.Tests
             // Arrange
             var keyValues = new object[] { Guid.NewGuid() };
             _mediator.Setup(x => x.Send(
-                    It.Is<ReadRequest<object, object>>(y => y.KeyValues[0].Equals(keyValues[0])),
+                    It.Is<ReadRequest<object, object>>(y => y.KeyValues[0] == keyValues[0]),
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(default(object));
-            var controller = new FakeClassController(_mediator.Object);
+            var controller = new FakeClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var read = await controller.Read(keyValues);
@@ -114,7 +121,9 @@ namespace Clarity.Abstractions.Controllers.Tests
         {
             // Arrange
             var model = new { Name = "Name" };
-            var controller = new FakeClassController(_mediator.Object);
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var update = await controller.Update(model);
@@ -132,10 +141,10 @@ namespace Clarity.Abstractions.Controllers.Tests
             // Arrange
             var model = new { Name = "Name" };
             _mediator.Setup(x => x.Send(
-                    It.Is<UpdateRequest<object, object>>(y => y.Model.Equals(model)),
+                    It.Is<UpdateRequest<object, object>>(y => y.Model == model),
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception());
-            var controller = new FakeClassController(_mediator.Object);
+            var controller = new FakeClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var update = await controller.Update(model);
@@ -154,10 +163,12 @@ namespace Clarity.Abstractions.Controllers.Tests
             // Arrange
             var model = new { Name = "Name" };
             _mediator.Setup(x => x.Send(
-                    It.Is<CreateRequest<object, object>>(y => y.Model.Equals(model)),
+                    It.Is<CreateRequest<object, object>>(y => y.Model == model),
                     It.IsAny<CancellationToken>()))
-                .ReturnsAsync(model);
-            var controller = new FakeClassController(_mediator.Object);
+                .ReturnsAsync((model, new object[]{ new {} }));
+            var cache = new Mock<IMemoryCache>();
+            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var create = await controller.Create(model);
@@ -176,10 +187,10 @@ namespace Clarity.Abstractions.Controllers.Tests
             // Arrange
             var model = new { Name = "Name" };
             _mediator.Setup(x => x.Send(
-                    It.Is<CreateRequest<object, object>>(y => y.Model.Equals(model)),
+                    It.Is<CreateRequest<object, object>>(y => y.Model == model),
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception());
-            var controller = new FakeClassController(_mediator.Object);
+            var controller = new FakeClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var create = await controller.Create(model);
@@ -197,7 +208,7 @@ namespace Clarity.Abstractions.Controllers.Tests
         {
             // Arrange
             var keyValues = new object[] { Guid.NewGuid() };
-            var controller = new FakeClassController(_mediator.Object);
+            var controller = new FakeClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var delete = await controller.Delete(keyValues);
@@ -215,10 +226,10 @@ namespace Clarity.Abstractions.Controllers.Tests
             // Arrange
             var keyValues = new object[] { Guid.NewGuid() };
             _mediator.Setup(x => x.Send(
-                    It.Is<DeleteRequest>(y => y.KeyValues[0].Equals(keyValues[0])),
+                    It.Is<DeleteRequest>(y => y.KeyValues[0] == keyValues[0]),
                     It.IsAny<CancellationToken>()))
                 .ThrowsAsync(new Exception());
-            var controller = new FakeClassController(_mediator.Object);
+            var controller = new FakeClassController(_mediator.Object, Mock.Of<IMemoryCache>(), Mock.Of<IOptions<CacheOptions>>());
 
             // Act
             var delete = await controller.Delete(keyValues);

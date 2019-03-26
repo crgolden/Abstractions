@@ -1,51 +1,42 @@
 ﻿namespace Clarity.Abstractions
 {
-    using System;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Caching.Memory;
 
-    public abstract class UpdateRangeRequestHandler<TRequest, TEntity, TModel> : IRequestHandler<TRequest>
+    public abstract class UpdateRangeRequestHandler<TRequest, TEntity, TModel> : IRequestHandler<TRequest, object[][]>
         where TRequest : UpdateRangeRequest<TEntity, TModel>
         where TEntity : class
     {
         protected readonly DbContext Context;
         protected readonly IMapper Mapper;
-        protected readonly IMemoryCache Cache;
 
-        protected UpdateRangeRequestHandler(DbContext context, IMapper mapper, IMemoryCache cache)
+        protected UpdateRangeRequestHandler(DbContext context, IMapper mapper)
         {
             Context = context;
             Mapper = mapper;
-            Cache = cache;
         }
 
-        public virtual async Task<Unit> Handle(TRequest request, CancellationToken token)
+        public virtual async Task<object[][]> Handle(TRequest request, CancellationToken token)
         {
-            foreach (var model in request.Models)
+            var keyValues = new object[request.Models.Length][];
+            for (var i = 0; i < request.Models.Length; i++)
             {
-                var entity = Mapper.Map<TEntity>(model);
+                var entity = Mapper.Map<TEntity>(request.Models[i]);
                 var entityEntry = Context.Entry(entity);
                 entityEntry.State = EntityState.Modified;
-                var keyValues = entityEntry.Metadata
+                keyValues[i] = entityEntry.Metadata
                     .FindPrimaryKey()
                     .Properties
                     .Select(x => entityEntry.Property(x.Name).CurrentValue)
                     .ToArray();
-                using (var cacheEntry = Cache.CreateEntry(keyValues))
-                {
-                    cacheEntry.SlidingExpiration = TimeSpan.FromSeconds(30);
-                    cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
-                    cacheEntry.SetValue(model);
-                }
             }
             
             await Context.SaveChangesAsync(token).ConfigureAwait(false);
-            return Unit.Value;
+            return keyValues;
         }
     }
 }

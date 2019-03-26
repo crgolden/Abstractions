@@ -2,7 +2,7 @@
 {
     using MediatR;
 
-    public abstract class UpdateRangeRequest<TEntity, TModel> : IRequest
+    public abstract class UpdateRangeRequest<TEntity, TModel> : IRequest<object[][]>
         where TEntity : class
     {
         public readonly TModel[] Models;
