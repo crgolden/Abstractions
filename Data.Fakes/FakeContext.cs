@@ -1,7 +1,9 @@
 ﻿namespace Clarity.Abstractions.Fakes
 {
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.EntityFrameworkCore;
 
+    [ExcludeFromCodeCoverage]
     internal class FakeContext : Context
     {
         internal FakeContext(DbContextOptions options) : base(options)

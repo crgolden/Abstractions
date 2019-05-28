@@ -1,7 +1,9 @@
 ﻿namespace Clarity.Abstractions
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     public abstract class Entity
     {
         public DateTime Created { get; private set; }

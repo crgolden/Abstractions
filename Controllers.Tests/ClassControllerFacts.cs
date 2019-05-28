@@ -1,6 +1,7 @@
 namespace Clarity.Abstractions.Controllers.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
     using Fakes;
@@ -13,6 +14,7 @@ namespace Clarity.Abstractions.Controllers.Tests
     using Shared;
     using Xunit;
 
+    [ExcludeFromCodeCoverage]
     public class ClassControllerFacts
     {
         private readonly Mock<IMediator> _mediator;

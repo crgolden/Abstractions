@@ -1,9 +1,11 @@
 ﻿namespace Clarity.Abstractions
 {
+    using System.Diagnostics.CodeAnalysis;
     using Kendo.Mvc.UI;
     using MediatR;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+    [ExcludeFromCodeCoverage]
     public abstract class ListRequest<TEntity, TModel> : IRequest<DataSourceResult>
         where TEntity : class
     {

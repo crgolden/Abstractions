@@ -1,7 +1,9 @@
 ﻿namespace Clarity.Abstractions.Fakes
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
+    [ExcludeFromCodeCoverage]
     internal class FakeEntity : Entity
     {
         internal Guid Id { get; private set; }

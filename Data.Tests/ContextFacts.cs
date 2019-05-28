@@ -1,10 +1,12 @@
 ﻿namespace Clarity.Abstractions.Data.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using Fakes;
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
+    [ExcludeFromCodeCoverage]
     public class ContextFacts
     {
         private static string DatabaseNamePrefix => typeof(ContextFacts).FullName;

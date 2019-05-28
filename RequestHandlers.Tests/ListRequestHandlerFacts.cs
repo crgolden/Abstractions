@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading;
@@ -13,6 +14,7 @@
     using Moq;
     using Xunit;
 
+    [ExcludeFromCodeCoverage]
     public class ListRequestHandlerFacts
     {
         private static string DatabaseNamePrefix => typeof(ListRequestHandlerFacts).FullName;

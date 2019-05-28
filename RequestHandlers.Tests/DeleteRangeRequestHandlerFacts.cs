@@ -1,5 +1,6 @@
 ﻿namespace Clarity.Abstractions.RequestHandlers.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
     using Fakes;
@@ -7,6 +8,7 @@
     using Moq;
     using Xunit;
 
+    [ExcludeFromCodeCoverage]
     public class DeleteRangeRequestHandlerFacts
     {
         private static string DatabaseNamePrefix => typeof(DeleteRequestHandlerFacts).FullName;

@@ -1,5 +1,6 @@
 ﻿namespace Clarity.Abstractions.Fakes
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using Controllers;
     using Kendo.Mvc.UI;
@@ -11,6 +12,7 @@
     using Moq;
     using Shared;
 
+    [ExcludeFromCodeCoverage]
     internal class FakeClassController : ClassController<object, object, object>
     {
         public FakeClassController(IMediator mediator, IMemoryCache cache, IOptions<CacheOptions> cacheOptions)

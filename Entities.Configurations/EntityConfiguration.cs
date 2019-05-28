@@ -1,8 +1,10 @@
 ﻿namespace Clarity.Abstractions
 {
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+    [ExcludeFromCodeCoverage]
     public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : Entity
     {

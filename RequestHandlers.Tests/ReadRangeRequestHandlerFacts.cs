@@ -1,5 +1,6 @@
 ﻿namespace Clarity.Abstractions.RequestHandlers.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -8,6 +9,7 @@
     using Moq;
     using Xunit;
 
+    [ExcludeFromCodeCoverage]
     public class ReadRangeRequestHandlerFacts
     {
         private static string DatabaseNamePrefix => typeof(ReadRangeRequestHandlerFacts).FullName;

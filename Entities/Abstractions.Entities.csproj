@@ -17,7 +17,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Clarity.Abstractions.snk</AssemblyOriginatorKeyFile>
     <PackageIconUrl>https://clarity-ui.azurewebsites.net/favicon.ico</PackageIconUrl>
-    <PackageProjectUrl>https://crgolden.visualstudio.com/Clarity</PackageProjectUrl>
+    <PackageProjectUrl>https://dev.azure.com/clarity-ventures/Clarity</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 

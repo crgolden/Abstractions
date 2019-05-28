@@ -1,12 +1,14 @@
 ﻿namespace Clarity.Abstractions
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
     using Microsoft.Extensions.Logging;
     using Shared;
 
+    [ExcludeFromCodeCoverage]
     public abstract class DeleteRangeNotificationHandler<TNotification> : INotificationHandler<TNotification>
         where TNotification : DeleteRangeNotification
     {

@@ -1,9 +1,12 @@
 ﻿namespace Clarity.Abstractions
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Kendo.Mvc.UI;
     using MediatR;
     using Shared;
+
+    [ExcludeFromCodeCoverage]
 
     public abstract class ListNotification : INotification
     {
