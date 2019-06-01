@@ -1,4 +1,4 @@
-namespace Clarity.Abstractions.Controllers.Tests
+namespace crgolden.Abstractions.Controllers.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

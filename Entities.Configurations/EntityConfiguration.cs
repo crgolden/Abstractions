@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions
+﻿namespace crgolden.Abstractions
 {
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.EntityFrameworkCore;

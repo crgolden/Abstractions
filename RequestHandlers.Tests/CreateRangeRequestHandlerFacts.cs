@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions.RequestHandlers.Tests
+﻿namespace crgolden.Abstractions.RequestHandlers.Tests
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;

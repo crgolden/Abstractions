@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions.Data.Tests
+﻿namespace crgolden.Abstractions.Data.Tests
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;

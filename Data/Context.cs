@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions
+﻿namespace crgolden.Abstractions
 {
     using System;
     using System.Linq;

@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions.Fakes
+﻿namespace crgolden.Abstractions.Fakes
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

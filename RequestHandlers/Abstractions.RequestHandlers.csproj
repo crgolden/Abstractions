@@ -2,30 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Clarity.Abstractions</RootNamespace>
+    <RootNamespace>crgolden.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
-    <PackageId>Clarity.Abstractions.RequestHandlers</PackageId>
-    <Version>1.6.5</Version>
-    <Company>Clarity</Company>
+    <PackageId>crgolden.Abstractions.RequestHandlers</PackageId>
+    <Version>1.0.0</Version>
+    <Company>crgolden</Company>
     <Authors>Chris Golden</Authors>
-    <RepositoryUrl>https://crgolden.visualstudio.com/Clarity/_git/Clarity.Abstractions</RepositoryUrl>
+    <RepositoryUrl>https://github.com/crgolden/crgolden.Abstractions</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Clarity.Abstractions.snk</AssemblyOriginatorKeyFile>
-    <PackageIconUrl>https://clarity-ui.azurewebsites.net/favicon.ico</PackageIconUrl>
-    <PackageProjectUrl>https://crgolden.visualstudio.com/Clarity</PackageProjectUrl>
+    <AssemblyOriginatorKeyFile>..\crgolden.Abstractions.snk</AssemblyOriginatorKeyFile>
+    <PackageIconUrl>https://crgolden-ui.azurewebsites.net/favicon.ico</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
-    <PackageReference Include="Clarity.Shared.Interfaces" Version="1.0.0" />
+    <PackageReference Include="crgolden.Shared.Interfaces" Version="1.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
-    <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,11 @@
-﻿namespace Clarity.Abstractions
+﻿namespace crgolden.Abstractions
 {
+    using System;
     using Hangfire;
     using Hangfire.Common;
     using Hangfire.Server;
     using Hangfire.Storage;
     using MediatR;
-    using System;
-    using System.Linq;
 
     public abstract class HangfireJobService : JobService
     {
@@ -30,26 +29,21 @@
             {
                 var recurringJobId = context.GetJobParameter<string>("RecurringJobId");
                 if (string.IsNullOrEmpty(recurringJobId)) return null;
-                var recurringJob = connection.GetRecurringJobs().Single(p => p.Id == recurringJobId);
                 JobData lastJobData = null;
                 StateData lastStateData = null;
                 do
                 {
                     var lastJob = connection.GetJobData($"{--currentJobId}");
-                    if (lastJob?.Job?.Method?.Name == methodName && lastJob.State == "Succeeded")
+                    if (lastJob?.Job?.Method?.Name == methodName && lastJob?.State == "Succeeded")
                     {
                         lastJobData = lastJob;
                     }
                 } while (lastJobData == null && currentJobId > 0);
 
                 if (lastJobData != null) lastStateData = connection.GetStateData($"{currentJobId}");
-                if (lastStateData?.Data.ContainsKey("SucceededAt") == true)
-                {
-                    var succeededAt = lastStateData.Data["SucceededAt"];
-                    return JobHelper.DeserializeNullableDateTime(succeededAt)?.ToLocalTime();
-                }
-
-                return null;
+                if (lastStateData?.Data.ContainsKey("SucceededAt") != true) return null;
+                var succeededAt = lastStateData.Data["SucceededAt"];
+                return JobHelper.DeserializeNullableDateTime(succeededAt)?.ToLocalTime();
             }
         }
     }

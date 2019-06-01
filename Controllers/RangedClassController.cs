@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions.Controllers
+﻿namespace crgolden.Abstractions.Controllers
 {
     using System;
     using System.Collections.Generic;

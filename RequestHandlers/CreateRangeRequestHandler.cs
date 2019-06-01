@@ -1,4 +1,4 @@
-﻿namespace Clarity.Abstractions
+﻿namespace crgolden.Abstractions
 {
     using System.Linq;
     using System.Threading;
