@@ -6,7 +6,7 @@
     [ExcludeFromCodeCoverage]
     public abstract class Entity
     {
-        public readonly DateTime Created;
+        public DateTime Created { get; }
 
         public DateTime? Updated { get; set; }
 
