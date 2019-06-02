@@ -5,7 +5,7 @@
     <RootNamespace>crgolden.Abstractions</RootNamespace>
     <LangVersion>latest</LangVersion>
     <PackageId>crgolden.Abstractions.Entities.Configurations</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Company>crgolden</Company>
     <Authors>Chris Golden</Authors>
     <RepositoryUrl>https://github.com/crgolden/crgolden.Abstractions</RepositoryUrl>
