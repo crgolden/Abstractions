@@ -10,7 +10,7 @@
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> entity)
         {
-            entity.Property(e => e.Created).HasDefaultValueSql("getutcdate()");
+            entity.Property(e => e.Created);
             entity.Property(e => e.Updated);
         }
     }

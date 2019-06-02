@@ -6,8 +6,13 @@
     [ExcludeFromCodeCoverage]
     public abstract class Entity
     {
-        public DateTime Created { get; private set; }
+        public readonly DateTime Created;
 
         public DateTime? Updated { get; set; }
+
+        protected Entity()
+        {
+            Created = DateTime.UtcNow;
+        }
     }
 }
