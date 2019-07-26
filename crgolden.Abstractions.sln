@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Controllers", "Controllers\Abstractions.Controllers.csproj", "{E1F0E4AC-A115-462B-9003-96615DC96418}"
 EndProject
@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Models", "Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Services", "Services\Abstractions.Services.csproj", "{F0CD2782-2B1A-45CF-966F-DFB271D04137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstractions.Profiles", "Profiles\Abstractions.Profiles.csproj", "{79B59B38-A145-44C7-B03B-73CC62F0B8B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Profiles", "Profiles\Abstractions.Profiles.csproj", "{79B59B38-A145-44C7-B03B-73CC62F0B8B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
