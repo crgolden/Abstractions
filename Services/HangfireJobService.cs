@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using AutoMapper;
     using Hangfire;
     using Hangfire.Server;
     using MediatR;
@@ -13,9 +14,10 @@
 
         protected HangfireJobService(
             IMediator mediator,
+            IMapper mapper,
             IBackgroundJobClient backgroundJobClient,
             IRecurringJobManager recurringJobManager)
-            : base(mediator)
+            : base(mediator, mapper)
         {
             BackgroundJobClient = backgroundJobClient;
             RecurringJobManager = recurringJobManager;
@@ -25,9 +27,9 @@
         {
             return long.TryParse(context.BackgroundJob.Id, out var currentJobId)
                 ? JobStorage.Current
-                    .GetMonitoringApi()
-                    .SucceededJobs(0, (int)currentJobId)
-                    .LastOrDefault(x => x.Value.Job.Method.Name == methodName).Value?.SucceededAt
+                    ?.GetMonitoringApi()
+                    ?.SucceededJobs(0, (int)currentJobId)
+                    ?.LastOrDefault(x => x.Value?.Job?.Method?.Name == methodName).Value?.SucceededAt
                 : null;
         }
     }
