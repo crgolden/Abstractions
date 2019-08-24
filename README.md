@@ -1,20 +1,11 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
-
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
-
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## [![crgolden.Abstractions.Controllers package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/ef247a79-1760-47f4-8fd8-9c5a84ef64a1/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=ef247a79-1760-47f4-8fd8-9c5a84ef64a1&preferRelease=true) Controllers
+## [![crgolden.Abstractions.Data package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/8c569fa0-637f-4354-b895-7ef0e34fcdce/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=8c569fa0-637f-4354-b895-7ef0e34fcdce&preferRelease=true) Data
+## [![crgolden.Abstractions.Entities package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/f5082510-5c77-4d51-891e-1c420586cf3a/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=f5082510-5c77-4d51-891e-1c420586cf3a&preferRelease=true) Entities
+## [![crgolden.Abstractions.Entities.Configurations package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/174d89bf-be2a-44c2-b474-de9e427cc7b2/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=174d89bf-be2a-44c2-b474-de9e427cc7b2&preferRelease=true) Entities.Configurations
+## [![crgolden.Abstractions.Models package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/45388f42-2063-4e6d-b016-3af9fde17765/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=45388f42-2063-4e6d-b016-3af9fde17765&preferRelease=true) Models
+## [![crgolden.Abstractions.NotificationHandlers package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/967dcbd8-3e70-450c-b04a-c450b71aa2db/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=967dcbd8-3e70-450c-b04a-c450b71aa2db&preferRelease=true) NotificationHandlers
+## [![crgolden.Abstractions.Notifications package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/fd684baf-0271-42e1-ab99-f9a1b5d18a58/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=fd684baf-0271-42e1-ab99-f9a1b5d18a58&preferRelease=true) Notifications
+## [![crgolden.Abstractions.Profiles package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/9a3c7dae-5164-4fe8-b7d1-87bd4b80538e/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=9a3c7dae-5164-4fe8-b7d1-87bd4b80538e&preferRelease=true) Profiles
+## [![crgolden.Abstractions.RequestHandlers package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/0af97497-3778-47ce-aacc-6d3c8b3009b4/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=0af97497-3778-47ce-aacc-6d3c8b3009b4&preferRelease=true) RequestHandlers
+## [![crgolden.Abstractions.Requests package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/1e3a2772-7396-4abd-91d9-ebe2dc854156/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=1e3a2772-7396-4abd-91d9-ebe2dc854156&preferRelease=true) Requests
+## [![crgolden.Abstractions.Services package in crgolden feed in Azure Artifacts](https://feeds.dev.azure.com/crgolden/8b89f437-a73a-4c97-afe4-847235279735/_apis/public/Packaging/Feeds/fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d/Packages/e51d4633-4cf3-4005-823d-8087dfa62a59/Badge)](https://dev.azure.com/crgolden/crgolden/_packaging?_a=package&feed=fc08049d-30e7-4f2e-a1f2-da1e4aef0d5d&package=e51d4633-4cf3-4005-823d-8087dfa62a59&preferRelease=true) Services
