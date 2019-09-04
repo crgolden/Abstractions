@@ -1,14 +1,13 @@
 ﻿namespace crgolden.Abstractions
 {
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
     using MediatR;
     using Microsoft.EntityFrameworkCore;
 
-    public abstract class ListRequestHandler<TRequest, TEntity, TModel> : IRequestHandler<TRequest, DataSourceResult>
+    public abstract class ListRequestHandler<TRequest, TEntity, TModel> : IRequestHandler<TRequest, IQueryable<TModel>>
         where TRequest : ListRequest<TEntity, TModel>
         where TEntity : class
     {
@@ -21,13 +20,12 @@
             Mapper = mapper;
         }
 
-        public virtual async Task<DataSourceResult> Handle(TRequest request, CancellationToken token)
+        public virtual Task<IQueryable<TModel>> Handle(TRequest request, CancellationToken token)
         {
             var entities = Context.Set<TEntity>().AsNoTracking();
-            return await Mapper
-                .ProjectTo<TModel>(entities)
-                .ToDataSourceResultAsync(request.Request, request.ModelState)
-                .ConfigureAwait(false);
+            var query = request.Options.ApplyTo(entities);
+            var result = Mapper.ProjectTo<TModel>(query);
+            return Task.FromResult(result);
         }
     }
 }

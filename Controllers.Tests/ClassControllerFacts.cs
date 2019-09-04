@@ -2,10 +2,10 @@ namespace crgolden.Abstractions.Controllers.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Fakes;
-    using Kendo.Mvc.UI;
     using MediatR;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
@@ -28,25 +28,24 @@ namespace crgolden.Abstractions.Controllers.Tests
         public async Task List_Ok()
         {
             // Arrange
-            var request = new DataSourceRequest();
-            var dataSourceResult = new DataSourceResult();
+            var objects = new object[] { }.AsQueryable();
             _mediator.Setup(x => x.Send(
-                    It.Is<ListRequest<object, object>>(y => y.Request == request),
+                    It.IsAny<ListRequest<object, object>>(),
                     It.IsAny<CancellationToken>()))
-                .ReturnsAsync(dataSourceResult);
+                .ReturnsAsync(objects);
             var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<DataSourceRequest>())).Returns(Mock.Of<ICacheEntry>());
+            cache.Setup(x => x.CreateEntry(It.IsAny<string>())).Returns(Mock.Of<ICacheEntry>());
             var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
-            var list = await controller.List(request);
+            var list = await controller.List(null);
 
             // Assert
             var result = Assert.IsType<OkObjectResult>(list);
             _mediator.Verify(x => x.Publish(
                 It.IsAny<ListNotification>(),
                 It.IsAny<CancellationToken>()), Times.Exactly(2));
-            Assert.Equal(dataSourceResult, result.Value);
+            Assert.Equal(objects, result.Value);
         }
 
         [Fact]
@@ -60,7 +59,7 @@ namespace crgolden.Abstractions.Controllers.Tests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(model);
             var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            cache.Setup(x => x.CreateEntry(It.IsAny<string>())).Returns(Mock.Of<ICacheEntry>());
             var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
@@ -124,7 +123,7 @@ namespace crgolden.Abstractions.Controllers.Tests
             // Arrange
             var model = new { Name = "Name" };
             var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            cache.Setup(x => x.CreateEntry(It.IsAny<string>())).Returns(Mock.Of<ICacheEntry>());
             var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
@@ -169,7 +168,7 @@ namespace crgolden.Abstractions.Controllers.Tests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync((model, new object[]{ new {} }));
             var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            cache.Setup(x => x.CreateEntry(It.IsAny<string>())).Returns(Mock.Of<ICacheEntry>());
             var controller = new FakeClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act

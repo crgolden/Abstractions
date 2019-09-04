@@ -28,7 +28,7 @@
                     _logger.LogInformation(
                         eventId: eventId,
                         message: "Searching request {@Request} at {@Time}",
-                        args: new object[] { notification.Request, DateTime.UtcNow });
+                        args: new object[] { notification.Options, DateTime.UtcNow });
                     break;
                 case EventIds.ListEnd:
                     _logger.LogInformation(
@@ -41,7 +41,7 @@
                         eventId: eventId,
                         exception: notification.Exception,
                         message: "Error searching request {@Request} at {@Time}",
-                        args: new object[] { notification.Request, DateTime.UtcNow });
+                        args: new object[] { notification.Options, DateTime.UtcNow });
                     break;
             }
 

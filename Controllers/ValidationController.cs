@@ -4,13 +4,12 @@
     using System.Threading;
     using System.Threading.Tasks;
     using MediatR;
+    using Microsoft.AspNet.OData;
     using Microsoft.AspNetCore.Mvc;
     using Shared;
 
     [Produces("application/json")]
-    [Route("v1/[controller]/[action]")]
-    [ApiController]
-    public abstract class ValidationController<TModel> : ControllerBase
+    public abstract class ValidationController<TModel> : ODataController
     {
         protected readonly IMediator Mediator;
 

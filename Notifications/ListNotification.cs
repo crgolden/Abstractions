@@ -2,8 +2,9 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Kendo.Mvc.UI;
+    using System.Linq;
     using MediatR;
+    using Microsoft.AspNet.OData.Query;
     using Shared;
 
     [ExcludeFromCodeCoverage]
@@ -12,9 +13,9 @@
     {
         public EventIds EventId { get; set; }
 
-        public DataSourceRequest Request { get; set; }
+        public ODataQueryOptions Options { get; set; }
 
-        public DataSourceResult Result {get; set; }
+        public IQueryable Result {get; set; }
 
         public Exception Exception { get; set; }
     }

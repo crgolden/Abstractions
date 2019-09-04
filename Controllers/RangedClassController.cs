@@ -12,7 +12,7 @@
     using Newtonsoft.Json;
     using Shared;
 
-    public abstract class RangedClassController<TEntity, TModel, TKey> : ClassController<TEntity, TModel, TKey>
+    public abstract class RangedClassController<TEntity, TModel, TKey> : ControllerBase<TEntity, TModel, TKey>
         where TEntity : class
     {
         protected RangedClassController(IMediator mediator, IMemoryCache cache, IOptions<CacheOptions> cacheOptions)

@@ -1,10 +1,12 @@
 ﻿namespace crgolden.Abstractions.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Kendo.Mvc.UI;
     using MediatR;
+    using Microsoft.AspNet.OData;
+    using Microsoft.AspNet.OData.Query;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Options;
@@ -12,9 +14,8 @@
     using Shared;
 
     [Produces("application/json")]
-    [Route("v1/[controller]/[action]")]
-    [ApiController]
-    public abstract class ClassController<TEntity, TModel, TKey> : ControllerBase
+    [ApiVersion("1.0")]
+    public abstract class ControllerBase<TEntity, TModel, TKey> : ODataController
         where TEntity : class
     {
         protected readonly string TypeName;
@@ -24,7 +25,7 @@
         protected readonly TimeSpan? AbsoluteExpirationRelativeToNow;
         protected readonly TimeSpan? SlidingExpiration;
 
-        protected ClassController(IMediator mediator, IMemoryCache cache, IOptions<CacheOptions> cacheOptions)
+        protected ControllerBase(IMediator mediator, IMemoryCache cache, IOptions<CacheOptions> cacheOptions)
         {
             TypeName = typeof(TModel).Name;
             Mediator = mediator;
@@ -34,7 +35,7 @@
             SlidingExpiration = cacheOptions.Value?.SlidingExpiration;
         }
 
-        public abstract Task<IActionResult> List(DataSourceRequest request);
+        public abstract Task<IActionResult> List(ODataQueryOptions<TModel> options);
 
         protected virtual async Task<IActionResult> List<TRequest, TNotification>(
             TRequest request,
@@ -46,12 +47,12 @@
             {
                 try
                 {
-                    notification.Request = request.Request;
+                    notification.Options = request.Options;
                     notification.EventId = EventIds.ListStart;
                     await Mediator.Publish(notification, tokenSource.Token).ConfigureAwait(false);
 
-                    var key = JsonConvert.SerializeObject(request.Request);
-                    if (Cache.TryGetValue($"{TypeName}: {key}", out DataSourceResult value))
+                    var key = JsonConvert.SerializeObject(request.Options);
+                    if (Cache.TryGetValue($"{TypeName}: {key}", out IQueryable value))
                     {
                         notification.Result = value;
                     }
@@ -82,7 +83,7 @@
             }
         }
 
-        public abstract Task<IActionResult> Read(TKey[] keyValues);
+        public abstract Task<IActionResult> Read([FromODataUri] params TKey[] keyValues);
 
         protected virtual async Task<IActionResult> Read<TRequest, TNotification>(
             TRequest request,

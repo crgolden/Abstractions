@@ -44,7 +44,7 @@ namespace crgolden.Abstractions.Controllers.Tests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync(keyValues);
             var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            cache.Setup(x => x.CreateEntry(It.IsAny<string>())).Returns(Mock.Of<ICacheEntry>());
             var controller = new FakeRangedClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act
@@ -105,7 +105,7 @@ namespace crgolden.Abstractions.Controllers.Tests
                     It.IsAny<CancellationToken>()))
                 .ReturnsAsync((models, keyValues));
             var cache = new Mock<IMemoryCache>();
-            cache.Setup(x => x.CreateEntry(It.IsAny<object[]>())).Returns(Mock.Of<ICacheEntry>());
+            cache.Setup(x => x.CreateEntry(It.IsAny<string>())).Returns(Mock.Of<ICacheEntry>());
             var controller = new FakeRangedClassController(_mediator.Object, cache.Object, Mock.Of<IOptions<CacheOptions>>());
 
             // Act

@@ -1,22 +1,19 @@
 ﻿namespace crgolden.Abstractions
 {
     using System.Diagnostics.CodeAnalysis;
-    using Kendo.Mvc.UI;
+    using System.Linq;
     using MediatR;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.AspNet.OData.Query;
 
     [ExcludeFromCodeCoverage]
-    public abstract class ListRequest<TEntity, TModel> : IRequest<DataSourceResult>
+    public abstract class ListRequest<TEntity, TModel> : IRequest<IQueryable<TModel>>
         where TEntity : class
     {
-        public readonly ModelStateDictionary ModelState;
+        public readonly ODataQueryOptions<TModel> Options;
 
-        public readonly DataSourceRequest Request;
-
-        protected ListRequest(ModelStateDictionary modelState, DataSourceRequest request)
+        protected ListRequest(ODataQueryOptions<TModel> options)
         {
-            ModelState = modelState;
-            Request = request;
+            Options = options;
         }
     }
 }

@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Services", "Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Profiles", "Profiles\Abstractions.Profiles.csproj", "{79B59B38-A145-44C7-B03B-73CC62F0B8B2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions.Models.Configurations", "Models.Configurations\Abstractions.Models.Configurations.csproj", "{67831B23-91AD-47E0-B87D-9089C9DA56BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{79B59B38-A145-44C7-B03B-73CC62F0B8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79B59B38-A145-44C7-B03B-73CC62F0B8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79B59B38-A145-44C7-B03B-73CC62F0B8B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67831B23-91AD-47E0-B87D-9089C9DA56BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67831B23-91AD-47E0-B87D-9089C9DA56BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67831B23-91AD-47E0-B87D-9089C9DA56BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67831B23-91AD-47E0-B87D-9089C9DA56BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

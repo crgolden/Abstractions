@@ -3,8 +3,8 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using Controllers;
-    using Kendo.Mvc.UI;
     using MediatR;
+    using Microsoft.AspNet.OData.Query;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Options;
@@ -19,7 +19,7 @@
         {
         }
 
-        public override Task<IActionResult> List(DataSourceRequest request)
+        public override Task<IActionResult> List(ODataQueryOptions<object> options)
         {
             return Task.FromResult(Mock.Of<IActionResult>());
         }

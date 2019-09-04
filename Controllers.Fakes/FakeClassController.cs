@@ -3,10 +3,9 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using Controllers;
-    using Kendo.Mvc.UI;
     using MediatR;
+    using Microsoft.AspNet.OData.Query;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Options;
     using Moq;
@@ -20,10 +19,10 @@
         {
         }
 
-        public override Task<IActionResult> List(DataSourceRequest request)
+        public override Task<IActionResult> List(ODataQueryOptions<object> options)
         {
             return List(
-                request: new Mock<ListRequest<object, object>>(new ModelStateDictionary(), request).Object,
+                request: new Mock<ListRequest<object, object>>(options).Object,
                 notification: Mock.Of<ListNotification>());
         }
 
